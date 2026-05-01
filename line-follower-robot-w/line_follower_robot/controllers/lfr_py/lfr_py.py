@@ -30,7 +30,7 @@ TARGETS = [
 ]
 
 TARGET_RADIUS = 0.15
-FINISH_POINT = (-17.927, 6.051)
+FINISH_POINT = (-17.812, 4.287)
 FINISH_RADIUS = 0.15
 
 JUNCTION_RADIUS = 0.6
@@ -109,8 +109,6 @@ def run():
     returning = False
     last_turn = None
 
-    print("[BOT] Старт!")
-
     while robot.step(TIME_STEP) != -1:
         left_pos = left_ps.getValue()
         right_pos = right_ps.getValue()
@@ -173,7 +171,6 @@ def run():
                 junc_count = 0
 
             if not any_line:
-                print("[BOT] Тупик!")
                 state = UTURN
                 step_count = 0
                 junc_count = 0
@@ -256,8 +253,6 @@ def run():
                 step_count = 0
 
         elif state == CHOOSE:
-            print(f"[BOT] Скан: L={has_left} R={has_right} F={has_forward} | returning={returning} last={last_turn}")
-
             chosen_rel = None
 
             if returning and last_turn is not None:
@@ -280,7 +275,6 @@ def run():
                     last_turn = chosen_rel
 
             if chosen_rel is not None:
-                print(f"[BOT] Выбор: {chosen_rel.upper()}")
                 if chosen_rel == 'left':
                     line_lost = False
                     state = TURN_L
@@ -292,7 +286,6 @@ def run():
                     cooldown = COOLDOWN
                 step_count = 0
             else:
-                print("[BOT] Тупик -> разворот")
                 state = UTURN
                 step_count = 0
 
@@ -330,7 +323,6 @@ def run():
             step_count += 1
             lv, rv = SPEED_TURN, -SPEED_TURN
             if step_count > UTURN_MIN and center_on:
-                print("[BOT] Разворот -> DRIVE")
                 returning = True
                 state = DRIVE
                 step_count = 0
@@ -349,7 +341,6 @@ def run():
                 lv, rv = SPEED_FWD, SPEED_FWD
             else:
                 if center_on or left_on or right_on:
-                    print("[BOT] Линия после цели -> DRIVE")
                     returning = True
                     state = DRIVE
                     step_count = 0
@@ -366,14 +357,6 @@ def run():
         rv = max(-MAX_SPEED, min(MAX_SPEED, rv))
         left_motor.setVelocity(lv)
         right_motor.setVelocity(rv)
-
-        if int(robot.getTime() * 1000) % 960 < TIME_STEP:
-            snames = {0:'DRIVE', 1:'ADV', 2:'SCANL', 3:'SCBKL', 4:'SCANR',
-                      5:'SCBKR', 6:'CHOSE', 7:'UTURN', 8:'TGTURN',
-                      100:'TURNL', 101:'TURNR'}
-            sname = snames.get(state, str(state))
-            print(f"[DBG] x={x:.3f} y={y:.3f} θ={math.degrees(theta):.0f} "
-                  f"| {sname:<6} cd={cooldown:2d} s={step_count:3d}")
 
 if __name__ == "__main__":
     run()

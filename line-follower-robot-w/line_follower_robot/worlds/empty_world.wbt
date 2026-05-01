@@ -1,0 +1,49 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puckGroundSensors.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/forklift/protos/Forklift.proto"
+
+WorldInfo {
+  title "Line Follower World"
+}
+Viewpoint {
+  orientation -0.05310653248890767 0.3474307480973771 0.9362006042956291 1.9310278194382409
+  position 6.850220988749353 -19.801970314547404 10.090495109223541
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 20 20
+  floorTileSize 20 20
+  floorAppearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "track.bmp"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+E-puck {
+  translation -7.0627 7.01944 -5.94816e-05
+  rotation 0 0 1 1.5708
+  controller "lfr_py"
+  turretSlot [
+    Forklift {
+      enablePhysics FALSE
+    }
+  ]
+  groundSensorsSlot [
+    E-puckGroundSensors {
+    }
+  ]
+}
+Pose {
+}

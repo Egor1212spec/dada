@@ -33,9 +33,7 @@
 
 ## 🎥 Демонстрация
 
-https://github.com/ТВОЙ_ЛОГИН/ИМЯ_РЕПОЗИТОРИЯ/blob/main/demo.mp4?raw=true
-
-
+https://github.com/Egor1212spec/dada/raw/main/Запись%202026-05-01%20230438.mp4
 
 ## 📂 Что внутри проекта
 

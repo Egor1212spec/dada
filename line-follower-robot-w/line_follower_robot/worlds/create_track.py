@@ -39,11 +39,24 @@ lines = [
 for line in lines:
     draw_thick_line(line[0][0], line[0][1], line[1][0], line[1][1], 1)
 
-# Финишная зона (большой черный квадрат)
-for y in range(790, 810):
-    for x in range(740, 760):
-        if 0 <= y < height and 0 <= x < width:
-            img[y][x] = (0, 0, 0)
+def draw_square(x, y, color, size=14):
+    min_x = max(0, x - size//2)
+    max_x = min(width, x + size//2)
+    min_y = max(0, y - size//2)
+    max_y = min(height, y + size//2)
+    for j in range(min_y, max_y):
+        for i in range(min_x, max_x):
+            img[j][i] = color
+
+# Цель 1 (Красный)
+draw_square(350, 400, (180, 0, 0), 14)
+# Цель 2 (Зеленый)
+draw_square(50, 600, (0, 180, 0), 14)
+# Цель 3 (Синий)
+draw_square(250, 500, (0, 0, 180), 14)
+
+# Финишная зона (Черный)
+draw_square(750, 800, (0, 0, 0), 20)
 
 with open('track.bmp', 'wb') as f:
     filesize = 54 + 3 * width * height

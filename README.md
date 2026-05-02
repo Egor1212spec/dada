@@ -33,7 +33,7 @@
 
 ## 🎥 Демонстрация
 
-<video src="https://github.com/Egor1212spec/dada/raw/main/demo.mp4" width="100%" controls="controls"></video>
+![demo](demo.gif)
 
 ## 📂 Что внутри проекта
 
